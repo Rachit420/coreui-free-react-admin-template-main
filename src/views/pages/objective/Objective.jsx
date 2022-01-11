@@ -47,7 +47,7 @@ export default function WidgetLg() {
         <table className="widgetLgTable">
           <thead>
             <tr className="widgetLgTr">
-              <th class="text-center" scope="col">
+              <th className="text-center" scope="col">
                 #
               </th>
               <th className="widgetLgTh col-4" scope="col">

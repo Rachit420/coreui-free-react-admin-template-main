@@ -53,7 +53,7 @@ export default function WidgetLg() {
     setPaginatedPosts(paginatedPost)
   }
   const sort = (objective) => {
-    setPaginatedPosts(objective.reverse());
+    setPaginatedPosts(objective.reverse())
     // console.log("hello");
     // console.log(objective);
   }
