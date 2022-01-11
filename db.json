@@ -1,0 +1,62 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Leanne Graham",
+      "activeSince": "Bret",
+      "outcome": "On Hold",
+      "address": {
+        "street": "Kulas Light",
+        "suite": "Apt. 556",
+        "city": "Gwenborough",
+        "zipcode": "92998-3874",
+        "geo": {
+          "lat": "-37.3159",
+          "lng": "81.1496"
+        }
+      },
+      "phone": "1-770-736-8031 x56442",
+      "status": "active",
+      "company": {
+        "name": "Romaguera-Crona",
+        "catchPhrase": "Multi-layered client-server neural-net",
+        "bs": "harness real-time e-markets"
+      }
+    },
+    {
+      "name": "rac",
+      "activeSince": "dhfh",
+      "status": "jdhhfkh",
+      "outcome": "jkshf",
+      "id": 3
+    },
+    {
+      "name": "hghjg",
+      "activeSince": "5 ug",
+      "status": "jkk",
+      "outcome": "nbn",
+      "id": 4
+    },
+    {
+      "name": "rachit_raj",
+      "activeSince": "2 aug 2001",
+      "status": "offline",
+      "outcome": "not good",
+      "id": 5
+    },
+    {
+      "name": "",
+      "activeSince": "",
+      "status": "",
+      "outcome": "",
+      "id": 6
+    },
+    {
+      "name": "",
+      "activeSince": "",
+      "status": "",
+      "outcome": "",
+      "id": 7
+    }
+  ]
+}

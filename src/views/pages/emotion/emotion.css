@@ -1,0 +1,47 @@
+.Title {
+  color: black;
+  font-weight: 700;
+}
+.flexBox-Container {
+  border: 1px solid black;
+  width: 100%;
+  height: auto;
+  display: flex;
+}
+.headTitle {
+  font-weight: 700;
+  margin-left: 10px;
+}
+.flexBox-boxOne {
+  border: 1px solid black;
+  flex: 1;
+  background-color: rgb(223, 223, 223);
+  width: 25%;
+}
+.flexBox-boxTwo {
+  border: 1px solid black;
+  flex: 2;
+  width: 50%;
+}
+.flexBox-boxThree {
+  border: 1px solid black;
+  flex: 1;
+  background-color: rgb(223, 223, 223);
+  width: 25%;
+}
+.flexBox-circles {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-color: red;
+}
+.flexBox-container-two {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px;
+  background-color: rgb(208, 208, 243);
+  margin-top: 10px;
+  padding-top: 20px;
+  width: inherit;
+  height: auto;
+}
