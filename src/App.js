@@ -1,5 +1,5 @@
-import React, { Component,useState } from 'react'
-import { Redirect,BrowserRouter, Route, Switch } from 'react-router-dom'
+import React, { Component, useState } from 'react'
+import { Redirect, BrowserRouter, Route, Switch } from 'react-router-dom'
 import './scss/style.scss'
 
 // const [login, setlogin] = useState(true);
@@ -20,7 +20,6 @@ const Page404 = React.lazy(() => import('./views/pages/page404/Page404'))
 const Page500 = React.lazy(() => import('./views/pages/page500/Page500'))
 
 class App extends Component {
-
   render() {
     return (
       <BrowserRouter>
@@ -30,17 +29,12 @@ class App extends Component {
               exact
               path="/register"
               name="Register"
-              render={(props) => <Register {...props} />} 
-             />
+              render={(props) => <Register {...props} />}
+            />
             <Route exact path="/404" name="Page 404" render={(props) => <Page404 {...props} />} />
             <Route exact path="/500" name="Page 500" render={(props) => <Page500 {...props} />} />
-            <Route
-             exact
-             path='/login' 
-             name='Login' 
-             render={(props) => <Login {...props} />} 
-            />
-            <Route path="/" name="Home" render={(props) => <DefaultLayout {...props}  />} />
+            <Route exact path="/login" name="Login" render={(props) => <Login {...props} />} />
+            <Route path="/" name="Home" render={(props) => <DefaultLayout {...props} />} />
           </Switch>
         </React.Suspense>
       </BrowserRouter>

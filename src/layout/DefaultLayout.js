@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import { AppContent, AppSidebar, AppHeader } from '../components/index'
 
 const DefaultLayout = () => {
-  
-
   return (
     <div>
       <AppSidebar />
