@@ -36,7 +36,12 @@ const routes = [
   { path: '/newProduct', name: 'NewProduct', exact: true, component: NewProduct },
   { path: '/objective', name: 'Objective', exact: true, component: Objective },
   { path: '/objective2', name: 'Objective2', exact: true, component: Objective2 },
-  { path: '/objective2/createNewRef', name: 'Create New Ref', exact: true, component: CreateNewRef },
+  {
+    path: '/objective2/createNewRef',
+    name: 'Create New Ref',
+    exact: true,
+    component: CreateNewRef,
+  },
   { path: '/:id/details', name: 'Details', component: Details },
   { path: '/details/:id/edit', name: 'Edit Reference Objective', exact: true, component: EditRef },
 ]

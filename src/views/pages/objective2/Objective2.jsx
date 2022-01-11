@@ -52,11 +52,11 @@ export default function WidgetLg() {
     const paginatedPost = _(Objective).slice(startIndex).take(pageSize).value()
     setPaginatedPosts(paginatedPost)
   }
-  // const sort = (objective) => {
-  //   setPaginatedPosts(objective.reverse());
-  //   // console.log("hello");
-  //   // console.log(objective);
-  // }
+  const sort = (objective) => {
+    setPaginatedPosts(objective.reverse());
+    // console.log("hello");
+    // console.log(objective);
+  }
   const deleteUser = () => {
     setDisabled(0)
     const id = {

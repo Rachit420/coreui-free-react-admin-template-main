@@ -196,7 +196,7 @@ const EditRef = () => {
                             <b>{item.score ? item.score.toFixed(1) : 'null'}%</b>
                           </p>
                         </div>
-                        <div key={index+1} className="container">
+                        <div key={index + 1} className="container">
                           {item.associatedEmotions.map((sub, index) => {
                             return (
                               <div key={index} className="inputBtn justify-content-center">

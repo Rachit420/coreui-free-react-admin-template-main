@@ -53,29 +53,29 @@ export default function WidgetLg() {
               <th className="widgetLgTh col-4" scope="col">
                 Name
               </th>
-              <th class="text-center" scope="col">
+              <th className="text-center" scope="col">
                 Active Since
               </th>
-              <th class="text-center">Status</th>
-              <th class="text-center col-2">Outcome</th>
-              <th class="widgetLgTh text-center">Actions</th>
+              <th className="text-center">Status</th>
+              <th className="text-center col-2">Outcome</th>
+              <th className="widgetLgTh text-center">Actions</th>
             </tr>
           </thead>
           <tbody>
             {users.map((user, index) => (
-              <tr>
+              <tr key={index}>
                 <td scope="row" className="text-center">
-                  <input type="checkbox" class="checkbox" value={user.id} id="checkbox" />
+                  <input type="checkbox" className="checkbox" value={user.id} id="checkbox" />
                 </td>
-                <td class="text-start" scope="row">
+                <td className="text-start" scope="row">
                   {user.name}
                 </td>
-                <td class="text-center">{user.activeSince}</td>
-                <td class="text-center">
+                <td className="text-center">{user.activeSince}</td>
+                <td className="text-center">
                   <CBadge color="success">{user.status}</CBadge>
                 </td>
-                <td class="text-center">{user.outcome}</td>
-                <td class="text-center">
+                <td className="text-center">{user.outcome}</td>
+                <td className="text-center">
                   <button className="btn btn-primary">Details</button>
                 </td>
               </tr>
