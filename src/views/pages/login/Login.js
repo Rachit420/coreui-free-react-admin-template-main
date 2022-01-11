@@ -29,16 +29,15 @@ function Login() {
     }
   })
   async function login() {
-    let item = {username, password};
-    let result = await axios.post('http://13.212.153.21:3000/login',item);
-    console.log(result);
-    console.log(item);
-   if(result.data == 'Login Succesful'){
-     history.push('/dashboard');
-   }
-   else{
-     alert("invalid username or password");
-   }
+    let item = { username, password }
+    let result = await axios.post('http://13.212.153.21:3000/login', item)
+    console.log(result)
+    console.log(item)
+    if (result.data == 'Login Succesful') {
+      history.push('/dashboard')
+    } else {
+      alert('invalid username or password')
+    }
   }
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
