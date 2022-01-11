@@ -1,4 +1,4 @@
-import "./newUser.css";
+import './newUser.css'
 
 export default function NewUser() {
   return (
@@ -50,5 +50,5 @@ export default function NewUser() {
         <button className="newUserButton">Create</button>
       </form>
     </div>
-  );
+  )
 }
