@@ -21,7 +21,6 @@ export default function WidgetLg() {
     console.log(result)
   }
 
-  const deleteUser = () => {}
   return (
     <div className="widgetTitle">
       <div className="widgetLg1">
