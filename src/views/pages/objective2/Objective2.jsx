@@ -35,6 +35,7 @@ export default function WidgetLg() {
   const [currentPage, setCurrentPage] = useState(1)
   const [ids, setIds] = useState([])
   const [disabled, setDisabled] = useState(0)
+  const [searchField, setSearchField] = useState()
 
   useEffect(() => {
     loadUsers()
@@ -52,10 +53,34 @@ export default function WidgetLg() {
     const paginatedPost = _(Objective).slice(startIndex).take(pageSize).value()
     setPaginatedPosts(paginatedPost)
   }
-  const sort = (objective) => {
-    setPaginatedPosts(objective.reverse())
+  const sortDate = () => {
+    // setPaginatedPosts([...paginatedPosts.reverse()])
     // console.log("hello");
-    // console.log(objective);
+    // console.log(Objective)
+    const temp = paginatedPosts.sort((a,b) => new Date(b.updatedOn) - new Date(a.updatedOn))
+    setPaginatedPosts([...temp])
+    console.log(temp)
+  }
+  const sortName = () => {
+    // setPaginatedPosts([...paginatedPosts.reverse()])
+    // console.log("hello");
+    // console.log(Objective)
+    const temp = paginatedPosts.sort((a, b) => a.title.localeCompare(b.title))
+    setPaginatedPosts([...temp])
+    console.log(temp)
+  }
+  const search = (event) => {
+    const search = event.target.value
+    if(search === ''){
+      return paginatedPosts
+    }
+    else{
+      paginatedPosts.filter((search) => {
+        return paginatedPosts.title == search
+      })
+    }
+    setSearchField(event.target.value)
+    console.log(event.target.value)
   }
   const deleteUser = () => {
     setDisabled(0)
@@ -147,6 +172,8 @@ export default function WidgetLg() {
           placeholder="search...."
           className="border-0 border border-danger"
           type="text"
+          value={searchField}
+          onChange={event => search(event)}
         ></input>
       </div>
       <div className="widgetLg">
@@ -193,7 +220,7 @@ export default function WidgetLg() {
             ))}
           </tbody>
         </table> */}
-        <CTable align="middle" className="mb-0 border" hover responsive>
+        <CTable align="middle" className="mb-0 border"  responsive>
           <CTableHead color="light">
             <CTableRow>
               <CTableHeaderCell className="col-1 text-center" scope="col">
@@ -205,7 +232,7 @@ export default function WidgetLg() {
                 <button
                   type="submit bg-black"
                   className="btn p-0"
-                  onClick={() => sort(paginatedPosts)}
+                  onClick={sortDate}
                 >
                   <BsArrowDown size={25} />
                 </button>
@@ -215,7 +242,7 @@ export default function WidgetLg() {
                 <button
                   type="submit bg-black"
                   className="btn p-0"
-                  onClick={() => sort(paginatedPosts)}
+                  onClick={sortName}
                 >
                   <BsArrowDown size={25} />
                 </button>
@@ -243,12 +270,12 @@ export default function WidgetLg() {
                           {item.user.registered}
                         </div> */}
                 </CTableDataCell>
-                <CTableDataCell className="text-center" colspan="2">
+                <CTableDataCell className="text-center" colSpan="2">
                   {/* <CIcon size="xl" icon={item.country.flag} title={item.country.name} /> */}
                   {DateFormatter(user.updatedOn)}
                 </CTableDataCell>
 
-                <CTableDataCell className="text-center" colspan="2">
+                <CTableDataCell className="text-center" colSpan="2">
                   <CBadge color="success">{!user.status ? 'null' : user.status}</CBadge>
                   {/* <CProgress thin color={item.usage.color} value={item.usage.value} /> */}
                 </CTableDataCell>
