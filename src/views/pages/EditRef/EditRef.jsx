@@ -37,7 +37,7 @@ const EditRef = () => {
     const resp = await axios.get(
       `http://13.212.153.21:3000/aggregateemotionrefobjective?refObjectiveId=${id}`,
     )
-    console.log(resp)
+    console.log(resp.data)
     const data = resp.data
     setDetails(data)
   }
@@ -52,11 +52,11 @@ const EditRef = () => {
     const Data = {
       refObjective: inputField,
       refObjectiveId: id,
-      status: 'Active',
+      status: details.status,
       userId: 'kunal',
-      title: 'Title',
+      title: details.title,
     }
-    // console.log("InputField",inputField1,inputField);
+    console.log("InputField",inputField);
     console.log(Data)
     axios
       .post('http://13.212.153.21:3000/saverefobjective', Data)
@@ -140,9 +140,9 @@ const EditRef = () => {
     criticality: critically,
     weightage: weightage,
   }
-  const handleDatat = () => {
-    console.log(details.title)
-  }
+  // const handleDatat = () => {
+  //   console.log(details.title)
+  // }
   const Critically = [
     {
       value: 1,
@@ -292,7 +292,7 @@ const EditRef = () => {
             <Link to="/objective2" className="btn btn-primary mx-2">
               Cancel
             </Link>
-            <Link className="btn btn-warning" onClick={handleSubmit}>
+            <Link to='' className="btn btn-warning" onClick={handleSubmit}>
               Apply Changes
             </Link>
           </div>
