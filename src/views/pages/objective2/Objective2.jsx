@@ -34,7 +34,7 @@ export default function WidgetLg() {
   const loadUsers = async () => {
     const result = await axios.get('http://13.212.153.21:3000/refobjectives')
     setUser(result.data)
-    setPaginatedPosts(_(result.data).slice(0).take(pageSize).value())
+    setPaginatedPosts(_(result.data.reverse()).slice(0).take(pageSize).value())
   }
 
   const pagination = (pageNo) => {
@@ -44,17 +44,11 @@ export default function WidgetLg() {
     setPaginatedPosts(paginatedPost)
   }
   const sortDate = () => {
-    // setPaginatedPosts([...paginatedPosts.reverse()])
-    // console.log("hello");
-    // console.log(Objective)
     const temp = paginatedPosts.sort((a,b) => new Date(b.updatedOn) - new Date(a.updatedOn))
     setPaginatedPosts([...temp])
     console.log(temp)
   }
   const sortName = () => {
-    // setPaginatedPosts([...paginatedPosts.reverse()])
-    // console.log("hello");
-    // console.log(Objective)
     const temp = paginatedPosts.sort((a, b) => a.title.localeCompare(b.title))
     setPaginatedPosts([...temp])
     console.log(temp)
@@ -70,12 +64,9 @@ export default function WidgetLg() {
      filteredChar = paginatedPosts.filter((character) => {
        return (character.title.toLowerCase().includes(searchString))
       })
-
       setPaginatedPosts(filteredChar)
     }
-   
     console.log(filteredChar)
-    // console.log(Objective)
   }
   const deleteUser = () => {
     setDisabled(0)
@@ -162,7 +153,6 @@ export default function WidgetLg() {
         </div>
       </div>
       <div className="container justify-content-end">
-        {/* <span className='border border-danger'><AiOutlineSearch size={30} /> */}
         <input
           placeholder="search...."
           className="border-0 border border-danger"
@@ -260,10 +250,6 @@ export default function WidgetLg() {
                 </CTableDataCell>
                 <CTableDataCell>
                   <div>{!user.title ? '' : user.title}</div>
-                  {/* <div className="small text-medium-emphasis">
-                          <span>{item.user.new ? 'New' : 'Recurring'}</span> | Registered:{' '}
-                          {item.user.registered}
-                        </div> */}
                 </CTableDataCell>
                 <CTableDataCell className="text-center" colSpan="2">
                   {/* <CIcon size="xl" icon={item.country.flag} title={item.country.name} /> */}
