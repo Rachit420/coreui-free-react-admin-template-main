@@ -9,16 +9,6 @@ import { AiFillStar, AiOutlineSearch } from 'react-icons/ai'
 import { RiDeleteBin5Line } from 'react-icons/ri'
 
 import {
-  CAvatar,
-  CButton,
-  CButtonGroup,
-  CCard,
-  CCardBody,
-  CCardFooter,
-  CCardHeader,
-  CCol,
-  CProgress,
-  CRow,
   CTable,
   CTableBody,
   CTableDataCell,
@@ -35,7 +25,7 @@ export default function WidgetLg() {
   const [currentPage, setCurrentPage] = useState(1)
   const [ids, setIds] = useState([])
   const [disabled, setDisabled] = useState(0)
-  const [searchField, setSearchField] = useState()
+  const [searchField, setSearchField] = useState('')
 
   useEffect(() => {
     loadUsers()
@@ -70,17 +60,22 @@ export default function WidgetLg() {
     console.log(temp)
   }
   const search = (event) => {
-    const search = event.target.value
-    if(search === ''){
-      return paginatedPosts
+    let filteredChar = []
+    setSearchField(event.target.value)
+    const searchString = event.target.value.toLowerCase()
+    if(!searchString){
+      setPaginatedPosts(Objective)
     }
     else{
-      paginatedPosts.filter((search) => {
-        return paginatedPosts.title == search
+     filteredChar = paginatedPosts.filter((character) => {
+       return (character.title.toLowerCase().includes(searchString))
       })
+
+      setPaginatedPosts(filteredChar)
     }
-    setSearchField(event.target.value)
-    console.log(event.target.value)
+   
+    console.log(filteredChar)
+    // console.log(Objective)
   }
   const deleteUser = () => {
     setDisabled(0)
