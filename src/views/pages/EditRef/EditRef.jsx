@@ -56,7 +56,7 @@ const EditRef = () => {
       userId: 'kunal',
       title: details.title,
     }
-    console.log("InputField",inputField);
+    console.log('InputField', inputField)
     console.log(Data)
     axios
       .post('http://13.212.153.21:3000/saverefobjective', Data)
@@ -292,7 +292,7 @@ const EditRef = () => {
             <Link to="/objective2" className="btn btn-primary mx-2">
               Cancel
             </Link>
-            <Link to='' className="btn btn-warning" onClick={handleSubmit}>
+            <Link to="" className="btn btn-warning" onClick={handleSubmit}>
               Apply Changes
             </Link>
           </div>

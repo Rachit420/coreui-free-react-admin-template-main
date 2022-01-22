@@ -44,7 +44,7 @@ export default function WidgetLg() {
     setPaginatedPosts(paginatedPost)
   }
   const sortDate = () => {
-    const temp = paginatedPosts.sort((a,b) => new Date(b.updatedOn) - new Date(a.updatedOn))
+    const temp = paginatedPosts.sort((a, b) => new Date(b.updatedOn) - new Date(a.updatedOn))
     setPaginatedPosts([...temp])
     console.log(temp)
   }
@@ -57,12 +57,11 @@ export default function WidgetLg() {
     let filteredChar = []
     setSearchField(event.target.value)
     const searchString = event.target.value.toLowerCase()
-    if(!searchString){
+    if (!searchString) {
       setPaginatedPosts(Objective)
-    }
-    else{
-     filteredChar = paginatedPosts.filter((character) => {
-       return (character.title.toLowerCase().includes(searchString))
+    } else {
+      filteredChar = paginatedPosts.filter((character) => {
+        return character.title.toLowerCase().includes(searchString)
       })
       setPaginatedPosts(filteredChar)
     }
@@ -158,7 +157,7 @@ export default function WidgetLg() {
           className="border-0 border border-danger"
           type="text"
           value={searchField}
-          onChange={event => search(event)}
+          onChange={(event) => search(event)}
         ></input>
       </div>
       <div className="widgetLg">
@@ -205,7 +204,7 @@ export default function WidgetLg() {
             ))}
           </tbody>
         </table> */}
-        <CTable align="middle" className="mb-0 border"  responsive>
+        <CTable align="middle" className="mb-0 border" responsive>
           <CTableHead color="light">
             <CTableRow>
               <CTableHeaderCell className="col-1 text-center" scope="col">
@@ -214,21 +213,13 @@ export default function WidgetLg() {
               <CTableHeaderCell className="col-2">Name</CTableHeaderCell>
               <CTableHeaderCell className="text-end">Active Since</CTableHeaderCell>
               <CTableHeaderCell>
-                <button
-                  type="submit bg-black"
-                  className="btn p-0"
-                  onClick={sortDate}
-                >
+                <button type="submit bg-black" className="btn p-0" onClick={sortDate}>
                   <BsArrowDown size={25} />
                 </button>
               </CTableHeaderCell>
               <CTableHeaderCell className="text-end">Status</CTableHeaderCell>
               <CTableHeaderCell>
-                <button
-                  type="submit bg-black"
-                  className="btn p-0"
-                  onClick={sortName}
-                >
+                <button type="submit bg-black" className="btn p-0" onClick={sortName}>
                   <BsArrowDown size={25} />
                 </button>
               </CTableHeaderCell>
