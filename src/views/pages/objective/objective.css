@@ -72,3 +72,6 @@ th{
   background-color: #b0c4de;
   height: 90%;
 }
+.emotion{
+  overflow-y: auto;
+}

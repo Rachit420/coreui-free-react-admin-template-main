@@ -24,20 +24,23 @@ function Login() {
   const [password, setPassword] = useState('')
   const history = useHistory()
   useEffect(() => {
-    if (localStorage.getItem('user-info')) {
-      history.push('/add')
+    if (sessionStorage.getItem('user-info')) {
+      history.push('/dashboard')
     }
   })
   async function login() {
     let item = { username, password }
     let result = await axios.post('http://13.212.153.21:3000/login', item)
+    const userData = result.data
     console.log(result)
-    console.log(item)
-    if (result.data == 'Login Succesful') {
-      history.push('/dashboard')
-    } else {
+    console.log(userData.username)
+    if (result.data == 'Login Unsuccesful') {
       alert('invalid username or password')
+    } else {
+      sessionStorage.setItem('user-info', JSON.stringify(userData))
+      history.push('/dashboard')
     }
+    console.log(localStorage.getItem('user-info'))
   }
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">

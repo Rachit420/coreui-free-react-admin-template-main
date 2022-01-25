@@ -10,12 +10,13 @@ import { useHistory } from 'react-router-dom'
 
 const CreateNewRef = () => {
   const history = useHistory()
+  const userData = JSON.parse(sessionStorage.getItem('user-info'))
 
   const [value1, setValue1] = useState(2)
   const [value2, setValue2] = useState(25)
   const { render, emotion, ids } = Emotions()
   // console.log(ids);
-  const [inputField1, setInputField1] = useState({})
+  const [inputField1, setInputField1] = useState('')
   const [inputField, setInputField] = useState([
     {
       objectiveName: '',
@@ -40,23 +41,26 @@ const CreateNewRef = () => {
     const Data = {
       refObjective: inputField,
       title: inputField1,
+      userId: userData.username,
+      status: userData.status,
     }
     console.log('InputField', inputField1, inputField)
     console.log(inputField[0].objectiveName)
     console.log(Data.refObjective)
-    // if(!Data.title)
-    //  console.log("hhah");
-    // else
-    //  console.log('nhaa');
-    axios
-      .post('http://13.212.153.21:3000/saverefobjective', Data)
-      .then((response) => {
-        history.push('/objective2')
-        console.log(response)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    console.log(Data)
+    if (!Data.title) {
+      alert('title field can not be empty')
+    } else {
+      axios
+        .post('http://13.212.153.21:3000/saverefobjective', Data)
+        .then((response) => {
+          history.push('/objective2')
+          console.log(response)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
   }
 
   const AddsubObjective = () => {
@@ -127,7 +131,6 @@ const CreateNewRef = () => {
       label: '100%',
     },
   ]
-  //   const x = document.getElementById('customRange1').value;
   const asscociatedEmotion = {
     emotionId: ids,
     criticality: value1,
@@ -141,7 +144,7 @@ const CreateNewRef = () => {
         <div className="container border border-3 h-100 w-25 d-inline-block mt-3">
           <div id="emotion">
             <h5 className="mt-3">Emotions</h5>
-            <div className="container">{render}</div>
+            <div className="container emotion">{render}</div>
           </div>
         </div>
         <div className="container border border-3 p-0 h-100 w-50 d-inline-block mt-3 bg-white">

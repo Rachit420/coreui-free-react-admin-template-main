@@ -8,6 +8,8 @@ import axios from 'axios'
 import { Slider } from '@material-ui/core'
 
 const EditRef = () => {
+  const userData = JSON.parse(sessionStorage.getItem('user-info'))
+  console.log(userData)
   const { id } = useParams()
   const history = useHistory()
   const { render, emotion, ids } = Emotions()
@@ -17,10 +19,6 @@ const EditRef = () => {
       associatedEmotions: [],
     },
   ])
-  // const [newDetails, setNewDetails] = useState({
-  //     objectiveName:'',
-  //     associatedEmotions:[]
-  // });
   const [details, setDetails] = useState({
     refObjective: [],
     title: '',
@@ -53,7 +51,7 @@ const EditRef = () => {
       refObjective: inputField,
       refObjectiveId: id,
       status: details.status,
-      userId: 'kunal',
+      userId: userData.username,
       title: details.title,
     }
     console.log('InputField', inputField)
@@ -86,8 +84,6 @@ const EditRef = () => {
     console.log(index)
     emValue[index].associatedEmotions.push(asscociatedEmotion)
     setInputField(emValue)
-    //    emotionArray.push(asscociatedEmotion);
-
     console.log(emValue[index].associatedEmotions)
   }
 
@@ -140,9 +136,6 @@ const EditRef = () => {
     criticality: critically,
     weightage: weightage,
   }
-  // const handleDatat = () => {
-  //   console.log(details.title)
-  // }
   const Critically = [
     {
       value: 1,
@@ -173,7 +166,7 @@ const EditRef = () => {
         <div className="container border border-3 w-25 d-inline-block bg-red mt-3">
           <div id="emotion" className="editTable">
             <h5 className="mt-3">Emotions</h5>
-            <div className="mx-3">{render}</div>
+            <div className="mx-3 emotion">{render}</div>
           </div>
         </div>
         <div className="container border h-100 w-50 d-inline-block mt-3 bg-white">
@@ -187,8 +180,8 @@ const EditRef = () => {
               {details.refObjective
                 ? details.refObjective.reverse().map((item, index) => {
                     return (
-                      <>
-                        <div key={index} className="container w-100 justify-content-between">
+                      <div key={index}>
+                        <div className="container w-100 justify-content-between">
                           <p key={item.objectiveName}>
                             <b>{item.objectiveName}</b>
                           </p>
@@ -196,7 +189,7 @@ const EditRef = () => {
                             <b>{item.score ? item.score.toFixed(1) : 'null'}%</b>
                           </p>
                         </div>
-                        <div key={index + 1} className="container">
+                        <div className="container">
                           {item.associatedEmotions.map((sub, index) => {
                             return (
                               <div key={index} className="inputBtn justify-content-center">
@@ -222,13 +215,13 @@ const EditRef = () => {
                                   </label>
                                 </li>
                                 <li>
-                                  <p key={sub.emotionId}>{sub.score ? sub.score.toFixed(2) : ''}</p>
+                                  <p key={sub.score}>{sub.score ? sub.score.toFixed(2) : ''}</p>
                                 </li>
                               </div>
                             )
                           })}
                         </div>
-                      </>
+                      </div>
                     )
                   })
                 : 'loading...'}
@@ -241,8 +234,8 @@ const EditRef = () => {
                       <label className="">
                         <b>Sub objective</b>
                       </label>
-                      <IconButton>
-                        <RemoveIcon onClick={(event) => handleRemoveFields(index, event)} />
+                      <IconButton onClick={(event) => handleRemoveFields(index, event)}>
+                        <RemoveIcon />
                       </IconButton>
                       <br />
                       <input
@@ -331,7 +324,6 @@ const EditRef = () => {
                 id="customRange2"
               />
             </div>
-            {/* <button type='button' className='btn btn-primary' onClick={() => handleDatat()}>Apply</button> */}
           </div>
         </div>
       </div>

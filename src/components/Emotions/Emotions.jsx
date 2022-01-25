@@ -23,7 +23,14 @@ export default function Emotions() {
     // console.log(value)
     // setIds(value);
   }
-  const color = ['#0040ff', '#ff8000', 'orange', 'green', 'purple']
+  const color = ['#0040ff', '#ff8000', 'orange', 'green', 'purple', 'red']
+
+  function generateRandomColor() {
+    var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16)
+    return randomColor
+    //random color will be freshly served
+  }
+
   return {
     ids,
     emotion,
@@ -43,7 +50,7 @@ export default function Emotions() {
                   <input
                     type="button"
                     className="btn btn-circle btn-sm"
-                    style={{ background: color[index] }}
+                    style={{ background: generateRandomColor() }}
                     key={data.id}
                     id="input"
                     name={data.name}

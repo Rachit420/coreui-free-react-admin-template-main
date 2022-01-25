@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import _ from 'lodash'
 import './objective2.css'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { CBadge } from '@coreui/react'
 import { BsPieChart, BsArrowDown } from 'react-icons/bs'
 import { AiFillStar, AiOutlineSearch } from 'react-icons/ai'
@@ -26,7 +26,7 @@ export default function WidgetLg() {
   const [ids, setIds] = useState([])
   const [disabled, setDisabled] = useState(0)
   const [searchField, setSearchField] = useState('')
-
+  const history = useHistory()
   useEffect(() => {
     loadUsers()
   }, [])
@@ -44,7 +44,7 @@ export default function WidgetLg() {
     setPaginatedPosts(paginatedPost)
   }
   const sortDate = () => {
-    const temp = paginatedPosts.sort((a, b) => new Date(b.updatedOn) - new Date(a.updatedOn))
+    const temp = paginatedPosts.sort((a, b) => new Date(a.updatedOn) - new Date(b.updatedOn))
     setPaginatedPosts([...temp])
     console.log(temp)
   }
@@ -76,7 +76,8 @@ export default function WidgetLg() {
     axios
       .post(`http://13.212.153.21:3000/deleterefobjectives`, id)
       .then((response) => {
-        loadUsers()
+        // loadUsers()
+        history.push('/objective2')
         console.log(response)
       })
       .catch((error) => {
@@ -131,7 +132,7 @@ export default function WidgetLg() {
 
   return (
     <div className="widgetTitle">
-      <div className="widgetLg1">
+      <div className="widgetLg1" responsive="true">
         <div className="container title">
           <i className="titleIcons  p-2 mb-3 shadow bg-white rounded">
             <BsPieChart size={30} color="red" />

@@ -74,48 +74,43 @@ const Details = () => {
           {details.refObjective
             ? details.refObjective.map((item, index) => {
                 return (
-                  <>
-                    <div key={index} className="container justify-content-between">
-                      <p key={item.objectiveName}>
+                  <div key={index}>
+                    <div className="container justify-content-between">
+                      <p>
                         <b>{item.objectiveName}</b>
                       </p>
-                      <p key={item.id}>
+                      <p>
                         <b>{item.score ? item.score.toFixed(1) : ''}%</b>
                       </p>
                     </div>
-                    <div key={index + 1} className="container">
+                    <div className="container">
                       {item.associatedEmotions.map((sub, index) => {
                         return (
                           <div key={index} className="inputBtn justify-content-center">
-                            <li key={index}>
+                            <li>
                               <input
                                 type="button"
                                 className="btn btn-circle btn-sm"
                                 style={{ background: color[index] }}
                                 onClick={() => value(sub.criticality, sub.weightage)}
-                                key={index}
                                 id="input"
                                 name={sub.emotionId}
                                 value=""
                               />
                             </li>
-                            <li key={sub.emotionId}>
-                              <label
-                                htmlFor={sub.emotionId}
-                                key={sub.emotionId}
-                                className="text-center"
-                              >
+                            <li>
+                              <label htmlFor={sub.emotionId} className="text-center">
                                 <b>{sub.emotionId}</b>
                               </label>
                             </li>
-                            <li key={sub.score}>
-                              <p key={sub.score}>{sub.score ? sub.score.toFixed(2) : ''}</p>
+                            <li>
+                              <p>{sub.score ? sub.score.toFixed(2) : ''}</p>
                             </li>
                           </div>
                         )
                       })}
                     </div>
-                  </>
+                  </div>
                 )
               })
             : 'loading...'}

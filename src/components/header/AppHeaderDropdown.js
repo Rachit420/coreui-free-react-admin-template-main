@@ -22,9 +22,18 @@ import {
 } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
 
+import { Redirect, useHistory } from 'react-router-dom'
+
 import avatar8 from './../../assets/images/avatars/8.jpg'
 
 const AppHeaderDropdown = () => {
+  const history = useHistory()
+  function logOut() {
+    sessionStorage.removeItem('user-info')
+    console.log(sessionStorage.getItem('user-info'))
+    history.push('/login')
+  }
+
   return (
     <CDropdown variant="nav-item">
       <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
@@ -84,9 +93,9 @@ const AppHeaderDropdown = () => {
           </CBadge>
         </CDropdownItem>
         <CDropdownDivider />
-        <CDropdownItem href="#">
-          <CIcon icon={cilLockLocked} className="me-2" />
-          Lock Account
+        <CDropdownItem className="btn" onClick={logOut}>
+          {/* <CIcon icon={cilLockLocked} className="me-2" /> */}
+          Log Out
         </CDropdownItem>
       </CDropdownMenu>
     </CDropdown>
