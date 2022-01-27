@@ -9,16 +9,11 @@ import { Slider } from '@material-ui/core'
 
 const EditRef = () => {
   const userData = JSON.parse(sessionStorage.getItem('user-info'))
-  console.log(userData)
+
   const { id } = useParams()
   const history = useHistory()
   const { render, emotion, ids } = Emotions()
-  const [inputField, setInputField] = useState([
-    {
-      objectiveName: '',
-      associatedEmotions: [],
-    },
-  ])
+  const [inputField, setInputField] = useState([])
   const [details, setDetails] = useState({
     refObjective: [],
     title: '',
@@ -42,11 +37,19 @@ const EditRef = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    if (inputField.length > 0) {
+      for (var i = 0; i < inputField.length; i++) {
+        if (inputField[i].objectiveName === '') {
+          return alert('objective name is empty')
+        } else if (inputField[i].associatedEmotions.length == 0) {
+          return alert('No emotion added')
+        }
+      }
+    }
     for (var i = 0; i < details.refObjective.length; i++) {
       inputField.push(details.refObjective[i])
     }
     console.log(inputField)
-
     const Data = {
       refObjective: inputField,
       refObjectiveId: id,
@@ -54,7 +57,7 @@ const EditRef = () => {
       userId: userData.username,
       title: details.title,
     }
-    console.log('InputField', inputField)
+    // console.log('InputField', inputField)
     console.log(Data)
     axios
       .post('http://13.212.153.21:3000/saverefobjective', Data)
@@ -79,6 +82,7 @@ const EditRef = () => {
   }
 
   const AddEmotions = (index, event) => {
+    event.preventDefault()
     console.log('nothing to add now')
     const emValue = [...inputField]
     console.log(index)
@@ -171,7 +175,7 @@ const EditRef = () => {
         </div>
         <div className="container border h-100 w-50 d-inline-block mt-3 bg-white">
           <div className="refObjective row" id="refObjective">
-            <p className="p-0 mx-2 mt-2">
+            <p className=" mx-2 mt-2">
               <b>
                 Reference objective <span>{details.title}</span>
               </b>
@@ -186,7 +190,7 @@ const EditRef = () => {
                             <b>{item.objectiveName}</b>
                           </p>
                           <p key={item.id}>
-                            <b>{item.score ? item.score.toFixed(1) : 'null'}%</b>
+                            <b>{item.score ? item.score.toFixed(1) : ''}%</b>
                           </p>
                         </div>
                         <div className="container">
@@ -199,18 +203,13 @@ const EditRef = () => {
                                     className="btn btn-circle btn-sm"
                                     style={{ background: color[index] }}
                                     onClick={() => value(sub.criticality, sub.weightage)}
-                                    key={sub.emotionId}
                                     id="input"
                                     name={sub.emotionId}
                                     value=""
                                   />
                                 </li>
                                 <li>
-                                  <label
-                                    htmlFor={sub.emotionId}
-                                    key={sub.emotionId}
-                                    className="text-center"
-                                  >
+                                  <label htmlFor={sub.emotionId} className="text-center">
                                     <b>{sub.emotionId}</b>
                                   </label>
                                 </li>
