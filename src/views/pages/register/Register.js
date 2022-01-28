@@ -53,11 +53,11 @@ const Register = () => {
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
       {/* <div className="container bg-white p-4"> */}
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-md-6">
-            <div class="card mb-4 mx-4">
-              <div class="card-body p-4">
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-md-6">
+            <div className="card mb-4 mx-4">
+              <div className="card-body p-4">
                 <form action="" onSubmit={handlesubmit}>
                   <h1>Register</h1>
                   <p className="text-medium-emphasis">Create your account</p>
