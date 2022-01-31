@@ -7,6 +7,7 @@ const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 
 // const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 const Configuration = React.lazy(() => import('./views/pages/configuration/Configuration'))
+const Cards = React.lazy(() => import('./views/base/cards/Cards'))
 const Home = React.lazy(() => import('./views/pages/home/Home.jsx'))
 const User = React.lazy(() => import('./views/pages/user/User.jsx'))
 const Emotion = React.lazy(() => import('./views/pages/emotion/Emotion'))
@@ -32,6 +33,8 @@ const routes = [
   { path: '/meeting', name: 'Transaction', exact: true, component: Meeting },
   { path: '/clientList', name: 'ClientList', exact: true, component: ClientList },
   { path: '/productList', name: 'ProductList', exact: true, component: ProductList },
+  { path: '/base', name: 'Base', component: Cards, exact: true },
+  { path: '/base/cards', name: 'Cards', component: Cards },
   { path: '/configuration', name: 'Configuration', exact: true, component: Configuration },
   { path: '/newProduct', name: 'NewProduct', exact: true, component: NewProduct },
   { path: '/objective', name: 'Objective', exact: true, component: Objective },
