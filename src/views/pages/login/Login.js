@@ -32,15 +32,19 @@ function Login() {
     let item = { username, password }
     let result = await axios.post('http://13.212.153.21:3000/login', item)
     const userData = result.data
-    console.log(result)
-    console.log(userData.username)
+    // console.log(result)
+    // console.log(userData.username)
     if (result.data == 'Login Unsuccesful') {
       alert('invalid username or password')
+      const usrName = document.getElementById("username")
+      const pass = document.getElementById("password")
+      usrName.value = ''
+      pass.value = ''
     } else {
       sessionStorage.setItem('user-info', JSON.stringify(userData))
       history.push('/dashboard')
     }
-    console.log(localStorage.getItem('user-info'))
+    // console.log(localStorage.getItem('user-info'))
   }
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
@@ -48,7 +52,7 @@ function Login() {
         <CCardGroup>
           <CCard className="p-4">
             <CCardBody>
-              <CForm>
+              <CForm action="" onSubmit={login}>
                 <h1>Login</h1>
                 <p className="text-medium-emphasis">Sign In to your account</p>
                 <CInputGroup className="mb-3">
@@ -57,8 +61,10 @@ function Login() {
                   </CInputGroupText>
                   <CFormInput
                     placeholder="Username"
+                    id="username"
                     onChange={(e) => setUserName(e.target.value)}
                     autoComplete="username"
+                    required
                   />
                 </CInputGroup>
                 <CInputGroup className="mb-4">
@@ -68,8 +74,10 @@ function Login() {
                   <CFormInput
                     type="password"
                     placeholder="Password"
+                    id="password"
                     onChange={(e) => setPassword(e.target.value)}
                     autoComplete="current-password"
+                    required
                   />
                 </CInputGroup>
                 <CRow>
@@ -79,9 +87,11 @@ function Login() {
                     </CButton>
                   </CCol>
                   <CCol xs={6} className="text-right">
-                    <CButton color="link" className="px-0">
-                      Forgot password?
-                    </CButton>
+                    <Link to="/forgetUser">
+                      <CButton color="link" className="px-0">
+                        Forgot password?
+                      </CButton>
+                    </Link>
                   </CCol>
                 </CRow>
               </CForm>

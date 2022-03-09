@@ -39,6 +39,7 @@ const Register = () => {
   }
 
   return (
+    <div className='form'>
     <div className="form-container">
       <div className="bg-white m-2 p-4 form-field">
         <form action="" onSubmit={handlesubmit}>
@@ -60,7 +61,7 @@ const Register = () => {
           <CInputGroup className="mb-3">
             <CInputGroupText>@</CInputGroupText>
             <CFormInput
-              placeholder="Email"
+              placeholder="Username"
               type="email"
               name="username"
               value={user.username}
@@ -118,6 +119,7 @@ const Register = () => {
           </div>
         </form>
       </div>
+    </div>
     </div>
   )
 }
