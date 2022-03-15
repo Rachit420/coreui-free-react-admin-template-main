@@ -6,9 +6,16 @@
     font-size: 8px;
 }
 .inputBtn{
+    display: inline;
+    position: relative;
     width:100px;
     height: 80px;
     font-size: 12px;
     justify-content: center;
     text-align: center;
+}
+.close{
+    position: absolute;
+    top: 0;
+    right: 0;
 }

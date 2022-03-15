@@ -7,6 +7,8 @@ import { IconButton } from '@material-ui/core'
 import { Slider } from '@material-ui/core'
 import Emotions from 'src/components/Emotions/Emotions'
 import { useHistory } from 'react-router-dom'
+import { TiDeleteOutline } from 'react-icons/ti'
+
 
 const CreateNewRef = () => {
   const history = useHistory()
@@ -14,6 +16,7 @@ const CreateNewRef = () => {
 
   const [value1, setValue1] = useState(2)
   const [value2, setValue2] = useState(25)
+  const [divIndex, setIndex] = useState('')
   const { render, emotion, ids } = Emotions()
   // console.log(ids);
   const [inputField1, setInputField1] = useState('')
@@ -41,25 +44,26 @@ const CreateNewRef = () => {
     const Data = {
       refObjective: inputField,
       title: inputField1,
-      userId: userData.username,
-      status: userData.status,
+      // userId: userData.username,
+      // status: userData.status,
     }
-    console.log('InputField', inputField1, inputField)
-    console.log(inputField[0].objectiveName)
-    console.log(Data.refObjective)
+    // console.log('InputField', inputField1, inputField)
+    // console.log(inputField[0].objectiveName)
+    // console.log(Data.refObjective)
     console.log(Data)
     if (!Data.title) {
       alert('title field can not be empty')
     } else {
-      axios
-        .post('http://13.212.153.21:3000/saverefobjective', Data)
-        .then((response) => {
-          history.push('/objective2')
-          console.log(response)
-        })
-        .catch((error) => {
-          console.log(error)
-        })
+      // axios
+      //   .post('http://13.212.153.21:3000/saverefobjective', Data)
+      //   .then((response) => {
+      //     history.push('/objective2')
+      //     console.log(response)
+      //   })
+      //   .catch((error) => {
+      //     console.log(error)
+      //   })
+      console.log('success')
     }
   }
 
@@ -75,13 +79,15 @@ const CreateNewRef = () => {
   function allowDrop(ev) {
     ev.preventDefault()
   }
-
+  // const catchIndex = drop()
   const drop = (ev, index) => {
+    console.log(index)
     ev.preventDefault()
     var data = ev.dataTransfer.getData('Text')
     var Drop = document.getElementById(index).children
     var nodeCopy = document.getElementById(data).cloneNode(true)
-    nodeCopy.id = ids /* We cannot use the same ID */
+    // console.log(nodeCopy)
+    // nodeCopy.id = ids /* We cannot use the same ID */
     let count = 0
     for (var i = 0; i < Drop.length; i++) {
       if (Drop[i].id == nodeCopy.id) {
@@ -90,9 +96,42 @@ const CreateNewRef = () => {
     }
     if (count == 0) {
       ev.target.appendChild(nodeCopy)
+      Drop[i].childNodes[1].hidden = false
+      Drop[i].childNodes[1].classList.add('pointer')
+      Drop[i].childNodes[1].addEventListener('click',deleteEmot)
     } else if (count > 0) {
       alert(nodeCopy.id + ' exist')
+      document.getElementById('emot').classList.remove('disabled')
+      return
     }
+    // let numb = document.getElementById(Drop).childNodes;
+    console.log(Drop)
+    // numb[1].hidden = false
+    // documnet.gelElementById('hidden').hidden = false
+    document.getElementById('emot').classList.add('disabled')
+    document.getElementById('expAtt').classList.remove('disabled')
+    // console.log(Drop.length)
+    // document.getElementById('hidden').addEventListener('click',deleteEmot)
+    setIndex(index)
+  }
+  // console.log(catchIndex)
+  const deleteEmot = (event) => {
+    let delEmot = event.currentTarget.parentNode.id
+    var index = event.currentTarget.parentNode.parentNode.id
+    // console.log(event.currentTarget.parentNode)
+    // console.log(event.currentTarget.parentNode.parentNode.id)
+    // var emotIndex = inputField
+    // console.log(emotIndex)
+    console.log(inputField[index].associatedEmotions)
+    for(var i=0; i<inputField[index].associatedEmotions.length; i++){
+      if( inputField[index].associatedEmotions[i].emotionId == delEmot){
+        inputField[index].associatedEmotions.splice(i,1)
+      }
+    }
+    console.log(inputField[index].associatedEmotions)
+    event.currentTarget.parentNode.remove()
+    console.log(delEmot)
+    
   }
   const AddEmotions = (index, event) => {
     console.log('nothing to add now')
@@ -101,9 +140,11 @@ const CreateNewRef = () => {
     emValue[index].associatedEmotions.push(asscociatedEmotion)
     setInputField(emValue)
     //    emotionArray.push(asscociatedEmotion);
-
+    document.getElementById('emot').classList.remove('disabled')
     console.log(emValue[index].associatedEmotions)
   }
+  
+
   const handleChange1 = (event, newValue) => {
     setValue1(newValue)
   }
@@ -141,7 +182,7 @@ const CreateNewRef = () => {
   return (
     <div className="container-fluid newObj">
       <div className="container h-100 justify-content-around">
-        <div className="container border border-3 h-100 w-25 d-inline-block mt-3">
+        <div id="emot" className="container border border-3 h-100 w-25 d-inline-block mt-3">
           <div id="emotion">
             <h5 className="mt-3">Emotions</h5>
             <div className="container emotion">{render}</div>
@@ -190,9 +231,11 @@ const CreateNewRef = () => {
                       <div
                         className="container bg-white"
                         id={index}
+                        name='Drp'
                         onDrop={(event) => drop(event, index)}
                         onDragOver={(event) => allowDrop(event)}
-                      ></div>
+                      >
+                      </div>
                       <div>
                         <button
                           className="btn border border-dark rounded-circle float-end mx-2"
@@ -222,7 +265,10 @@ const CreateNewRef = () => {
             </Link>
           </div>
         </div>
-        <div className="container border border-3 h-100 w-25 d-inline-block mt-3 px-3">
+        <div
+          id="expAtt"
+          className="container border border-3 h-100 w-25 d-inline-block mt-3 px-3 disabled"
+        >
           <h5 className="mt-3">Expression attributes</h5>
           <b>
             <p>Flexibility</p>
@@ -253,6 +299,9 @@ const CreateNewRef = () => {
             valueLabelDisplay="on"
             id="customRange2"
           />
+          <button className="btn btn-primary" onClick={(event) => AddEmotions(divIndex,event)}>
+            Save
+          </button>
         </div>
       </div>
     </div>

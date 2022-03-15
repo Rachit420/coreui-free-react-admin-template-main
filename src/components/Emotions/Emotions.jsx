@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import './emotion.css'
+import { TiDeleteOutline } from 'react-icons/ti'
 
 export default function Emotions() {
   const [emotion, setEmotion] = useState([])
@@ -46,7 +47,9 @@ export default function Emotions() {
                   onDragStart={(event) => drag(event, data.id)}
                   onClick={() => id(data.id)}
                   id={data.id}
-                >
+                > <span className='close' id={data.name} name={data.name} hidden >
+                  <TiDeleteOutline color="red" id="deleteButton" />
+                  </span>
                   <input
                     type="button"
                     className="btn btn-circle btn-sm"
