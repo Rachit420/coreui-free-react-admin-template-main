@@ -182,7 +182,7 @@ const EditRef = () => {
             </p>
             <div className="row mt-0">
               {details.refObjective
-                ? details.refObjective.reverse().map((item, index) => {
+                ? details.refObjective.map((item, index) => {
                     return (
                       <div key={index}>
                         <div className="container w-100 justify-content-between">

@@ -44,8 +44,8 @@ const CreateNewRef = () => {
     const Data = {
       refObjective: inputField,
       title: inputField1,
-      // userId: userData.username,
-      // status: userData.status,
+      userId: userData.username,
+      status: userData.status,
     }
     // console.log('InputField', inputField1, inputField)
     // console.log(inputField[0].objectiveName)
@@ -54,15 +54,15 @@ const CreateNewRef = () => {
     if (!Data.title) {
       alert('title field can not be empty')
     } else {
-      // axios
-      //   .post('http://13.212.153.21:3000/saverefobjective', Data)
-      //   .then((response) => {
-      //     history.push('/objective2')
-      //     console.log(response)
-      //   })
-      //   .catch((error) => {
-      //     console.log(error)
-      //   })
+      axios
+        .post('http://13.212.153.21:3000/saverefobjective', Data)
+        .then((response) => {
+          history.push('/objective2')
+          console.log(response)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
       console.log('success')
     }
   }
@@ -130,6 +130,8 @@ const CreateNewRef = () => {
     }
     console.log(inputField[index].associatedEmotions)
     event.currentTarget.parentNode.remove()
+    document.getElementById('emot').classList.remove('disabled')
+    document.getElementById('expAtt').classList.add('disabled')
     console.log(delEmot)
     
   }
@@ -141,6 +143,7 @@ const CreateNewRef = () => {
     setInputField(emValue)
     //    emotionArray.push(asscociatedEmotion);
     document.getElementById('emot').classList.remove('disabled')
+    document.getElementById('expAtt').classList.add('disabled')
     console.log(emValue[index].associatedEmotions)
   }
   
@@ -229,22 +232,13 @@ const CreateNewRef = () => {
                     </p>
                     <div className="container" id="div1">
                       <div
-                        className="container bg-white"
+                        className="container bg-white emotCont" 
                         id={index}
                         name='Drp'
                         onDrop={(event) => drop(event, index)}
                         onDragOver={(event) => allowDrop(event)}
                       >
-                      </div>
-                      <div>
-                        <button
-                          className="btn border border-dark rounded-circle float-end mx-2"
-                          name="associatedEmotions"
-                          type="button"
-                          onClick={(event) => AddEmotions(index, event)}
-                        >
-                          +
-                        </button>
+                        
                       </div>
                     </div>
                   </div>

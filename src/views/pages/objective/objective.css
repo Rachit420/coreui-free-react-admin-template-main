@@ -97,3 +97,6 @@ th{
   cursor: pointer;
   transform: scale(2);
 }
+.emotCont{
+  height: 80px;
+}
