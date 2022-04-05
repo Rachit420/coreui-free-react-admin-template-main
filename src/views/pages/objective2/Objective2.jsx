@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import _ from 'lodash'
 import './objective2.css'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, useNavigate } from 'react-router-dom'
 import { CBadge } from '@coreui/react'
 import { BsPieChart, BsArrowDown } from 'react-icons/bs'
 import { AiFillStar, AiOutlineSearch } from 'react-icons/ai'
@@ -16,6 +16,7 @@ import {
   CTableHeaderCell,
   CTableRow,
 } from '@coreui/react'
+import { check } from 'prettier'
 
 const pageSize = 10
 
@@ -27,6 +28,7 @@ export default function WidgetLg() {
   const [disabled, setDisabled] = useState(0)
   const [searchField, setSearchField] = useState('')
   const history = useHistory()
+  // const navigate = useNavigate()
   useEffect(() => {
     loadUsers()
   }, [])
@@ -72,24 +74,33 @@ export default function WidgetLg() {
     const id = {
       refObjectiveIds: ids,
     }
+    setIds([])
     console.log(id)
     axios
       .post(`http://13.212.153.21:3000/deleterefobjectives`, id)
       .then((response) => {
-        // loadUsers()
-        history.push('/objective2')
+        document.getElementById('checkbox').uncheck
+        loadUsers()
+        // history.push('/objective2')
+        // navigate('/objective2')
         console.log(response)
       })
       .catch((error) => {
         console.log(error)
       })
+      // history.push('/objective2')
   }
 
   function state() {
     if (disabled == 0) return true
     else return false
   }
-
+  function check(){
+    if(ids.length==0){
+      return false
+    }
+   
+  }
   const handleId = (event) => {
     const id = event.target.value
     if (event.target.checked) {
@@ -238,6 +249,7 @@ export default function WidgetLg() {
                     id="checkbox"
                     className="checkbox"
                     onChange={(event) => handleId(event)}
+                    checked={check()}
                   />
                 </CTableDataCell>
                 <CTableDataCell>

@@ -1,0 +1,107 @@
+.widgetLg1 {
+    display: flex;
+    margin: 10px;
+    margin: 10px;
+    -webkit-box-shadow: 0px 0px 15px 10px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    padding: 20px;
+    justify-content: space-between;
+    background-color: rgb(230, 230, 230);
+    overflow-wrap: normal;
+  }
+  .widgetTitle{
+  background-color: white;
+  padding: 10px;
+  }
+  .widgetLg {
+    margin: 10px;
+    border: 1px solid #ddd;
+  }
+  .checkbox[type=checkbox] {
+    border-radius: .25em;
+    height: 20px;
+    width: 20px;
+  }
+  tr:nth-child(odd) {
+    background-color: rgb(230, 230, 230);
+  }
+  th{
+    background-color: white;
+  }
+  .CreateButton{
+    display: flex;
+    border-radius: 10px;
+    justify-content: space-between;
+    width: 225px;
+    color: whitesmoke;
+  }
+  #btn{
+    font-size: large;
+    height: 46px;
+    background-color: rgb(0, 191, 255);
+  }
+  .widgetLgTitle {
+    font-size: 22px;
+    font-weight: 600;
+  }
+  
+  .widgetLgTable{
+    width: 100%;
+    border-spacing: 20px;
+  }
+  
+  .widgetLgUser{
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+  }
+  .newObj{
+    height: 500px;
+  }
+  #subBtn{
+    background-color: #ffbf00;
+  }
+  .createObj{
+    height: 85%;
+    overflow-y: scroll;
+  }
+  #createObjLink{
+    background-color:#2080df ;
+  }
+  #emotion{
+    background-color: #b0c4de;
+    height: 90%;
+  }
+  .emotion{
+    overflow-y: auto;
+  }
+  .disabled{
+    pointer-events: none;
+    opacity: 0.7; 
+  }
+  .btn-circle.btn-sm {
+    width: 45px;
+    height: 45px;
+    padding: 6px 0px;
+    border-radius: 25px;
+    font-size: 8px;
+  }
+  .inputBtn{
+    width:100px;
+    height: 80px;
+    font-size: 12px;
+    justify-content: center;
+    text-align: center;
+  }
+  .pointer:hover{
+    cursor: pointer;
+    transform: scale(2);
+  }
+  .emotCont{
+    height: 80px;
+  }
+  .close{
+    position: absolute;
+    top: 0;
+    right: 0;
+}

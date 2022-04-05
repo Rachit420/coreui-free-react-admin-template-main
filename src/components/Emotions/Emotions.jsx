@@ -53,7 +53,7 @@ export default function Emotions() {
                   <input
                     type="button"
                     className="btn btn-circle btn-sm"
-                    style={{ background: generateRandomColor() }}
+                    style={{ background: color[index] }}
                     key={data.id}
                     id="input"
                     name={data.name}
