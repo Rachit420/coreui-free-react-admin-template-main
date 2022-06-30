@@ -33,11 +33,11 @@ function Login() {
     let result = await axios.post('http://13.212.153.21:3000/login', item)
     const userData = result.data
     // console.log(result)
-    // console.log(userData.username)
+    console.log(userData)
     if (result.data == 'Login Unsuccesful') {
       alert('invalid username or password')
-      const usrName = document.getElementById("username")
-      const pass = document.getElementById("password")
+      const usrName = document.getElementById('username')
+      const pass = document.getElementById('password')
       usrName.value = ''
       pass.value = ''
     } else {

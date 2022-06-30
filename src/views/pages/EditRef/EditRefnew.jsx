@@ -37,7 +37,6 @@ const EditrefNew = () => {
   const [critically, setCritically] = useState(2)
   const [weightage, setWeightage] = useState(0)
 
-
   useEffect(() => {
     loadUser()
   }, [])
@@ -55,7 +54,6 @@ const EditrefNew = () => {
     // console.log(details.refObjective)
   }
 
- 
   function handleChangeInput1(event) {
     // console.log(event.target.value);
     const value = event.target.value
@@ -89,7 +87,7 @@ const EditrefNew = () => {
       refObjectiveId: id,
       status: details.status,
       userId: userData.username,
-      title:inputField1,
+      title: inputField1,
     }
     // console.log('InputField', inputField)
     console.log(Data)
@@ -102,7 +100,6 @@ const EditrefNew = () => {
       .catch((error) => {
         console.log(error)
       })
-    
   }
 
   const AddsubObjective = () => {
@@ -163,7 +160,7 @@ const EditrefNew = () => {
     console.log(event.currentTarget.parentNode.parentNode.id)
     // var emotIndex = inputField
     console.log(delEmot)
-   
+
     // event.currentTarget.parentNode.remove()
     const val = [...inputField]
     // console.log(inputField[index].associatedEmotions)
@@ -173,7 +170,7 @@ const EditrefNew = () => {
       }
     }
     setInputField(val)
-  
+
     console.log(inputField[index].associatedEmotions)
 
     document.getElementById('emot').classList.remove('disabled')
@@ -188,7 +185,7 @@ const EditrefNew = () => {
     console.log(event.currentTarget.parentNode.parentNode.id)
     // var emotIndex = inputField
     console.log(delEmot)
-   
+
     event.currentTarget.parentNode.remove()
     const val = [...inputField]
     // console.log(inputField[index].associatedEmotions)
@@ -198,14 +195,13 @@ const EditrefNew = () => {
       }
     }
     setInputField(val)
-  
+
     console.log(inputField[index].associatedEmotions)
 
     document.getElementById('emot').classList.remove('disabled')
     document.getElementById('expAtt').classList.add('disabled')
     console.log(delEmot)
   }
-
 
   const AddEmotions = (index, event) => {
     console.log('nothing to add now')
@@ -215,31 +211,27 @@ const EditrefNew = () => {
     console.log(emValue[index].associatedEmotions.length)
     console.log(asscociatedEmotion.emotionId)
     // var EmotName = event.currentTarget.name
-    if(emValue[index].associatedEmotions.length == 0){
+    if (emValue[index].associatedEmotions.length == 0) {
       console.log('noadding')
       emValue[index].associatedEmotions.push(asscociatedEmotion)
-    }
-    else{
+    } else {
       let j = 0
       let count = 0
       // const j = emValue[index].associatedEmotions.emotionId.indexOf(asscociatedEmotion.emotionId)
-      for(var i=0; i< emValue[index].associatedEmotions.length; i++){
-       
-      if(asscociatedEmotion.emotionId == emValue[index].associatedEmotions[i].emotionId){
-      
-      j=i
-      count++
+      for (var i = 0; i < emValue[index].associatedEmotions.length; i++) {
+        if (asscociatedEmotion.emotionId == emValue[index].associatedEmotions[i].emotionId) {
+          j = i
+          count++
+        }
       }
-     
-    }
-    if(count == 0){
-      emValue[index].associatedEmotions.push(asscociatedEmotion)
-    }else{
-      emValue[index].associatedEmotions[j].criticality = critically
+      if (count == 0) {
+        emValue[index].associatedEmotions.push(asscociatedEmotion)
+      } else {
+        emValue[index].associatedEmotions[j].criticality = critically
         emValue[index].associatedEmotions[j].weightage = weightage
+      }
     }
-  }
-  document.getElementById('createObj').classList.remove('disabled')
+    document.getElementById('createObj').classList.remove('disabled')
     // emValue[index].associatedEmotions.push(asscociatedEmotion)
     setInputField(emValue)
     //    emotionArray.push(asscociatedEmotion);
@@ -248,7 +240,7 @@ const EditrefNew = () => {
     console.log(emValue[index].associatedEmotions)
   }
 
-  function value(event,value1, value2) {
+  function value(event, value1, value2) {
     var index = event.currentTarget.parentNode.parentNode.id
     console.log(event.currentTarget.name)
     setEmotIds(event.currentTarget.name)
@@ -308,8 +300,8 @@ const EditrefNew = () => {
           </div>
         </div>
         <div className="container border border-3 p-0 h-100 w-50 d-inline-block mt-3 bg-white">
-          <div id='createObj' className="border border-bottom mb-4 createObj">
-          <div className="px-4 mt-5">
+          <div id="createObj" className="border border-bottom mb-4 createObj">
+            <div className="px-4 mt-5">
               <label className="">
                 <b>Title of the Refrence objective</b>
               </label>
@@ -353,40 +345,40 @@ const EditrefNew = () => {
                         name="Drp"
                         onDrop={(event) => drop(event, index)}
                         onDragOver={(event) => allowDrop(event)}
-                        style={{borderStyle: 'dotted', borderRadius: 1}}
+                        style={{ borderStyle: 'dotted', borderRadius: 1 }}
                       >
-                       
-                        {
-                        input.associatedEmotions.map((sub, index) => {
+                        {input.associatedEmotions.map((sub, index) => {
                           return (
-                        
-                            <div key={index} className="inputBtn justify-content-center" id={sub.emotionId}>
-                              <span className="close pointer" onClick={(event) => deleteEmot1(event)}>
+                            <div
+                              key={index}
+                              className="inputBtn justify-content-center"
+                              id={sub.emotionId}
+                            >
+                              <span
+                                className="close pointer"
+                                onClick={(event) => deleteEmot1(event)}
+                              >
                                 <TiDeleteOutline color="red" id="deleteButton" />
                               </span>
-                            
-                                <input
-                                  type="button"
-                                  className="btn btn-circle btn-sm"
-                                  style={{ background: color[index] }}
-                                  onClick={(event) => value(event,sub.criticality, sub.weightage)}
-                                  id="input"
-                                  name={sub.emotionId}
-                                  value=""
-                                />
-                                <br />
-                                <label htmlFor={sub.emotionId} className="text-center">
-                                  <b>{sub.emotionId}</b>
-                                </label>
-                            
-                                {/* <p key={sub.score}>{sub.score ? sub.score.toFixed(2) : ''}</p> */}
-                              
+
+                              <input
+                                type="button"
+                                className="btn btn-circle btn-sm"
+                                style={{ background: color[index] }}
+                                onClick={(event) => value(event, sub.criticality, sub.weightage)}
+                                id="input"
+                                name={sub.emotionId}
+                                value=""
+                              />
+                              <br />
+                              <label htmlFor={sub.emotionId} className="text-center">
+                                <b>{sub.emotionId}</b>
+                              </label>
+
+                              {/* <p key={sub.score}>{sub.score ? sub.score.toFixed(2) : ''}</p> */}
                             </div>
-                    
                           )
-                        })
-                      }
-                       
+                        })}
                       </div>
                     </div>
                   </div>
@@ -402,10 +394,10 @@ const EditrefNew = () => {
             </button>
           </div>
           <div className="container w-100 d-flex justify-content-center">
-          <Link to="/objective2" className="btn btn-primary mx-2">
+            <Link to="/objective2" className="btn btn-primary mx-2">
               Cancel
             </Link>
-          <Link to="" className="btn btn-warning" onClick={handleSubmit}>
+            <Link to="" className="btn btn-warning" onClick={handleSubmit}>
               Apply Changes
             </Link>
           </div>

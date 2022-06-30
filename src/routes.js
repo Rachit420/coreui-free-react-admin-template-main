@@ -47,7 +47,12 @@ const routes = [
   },
   { path: '/:id/details', name: 'Details', component: Details },
   // { path: '/details/:id/edit', name: 'Edit Reference Objective', exact: true, component: EditRef },
-  { path: '/details/:id/edit', name: 'Edit Reference Objective', exact: true, component: EditRefNew },
+  {
+    path: '/details/:id/edit',
+    name: 'Edit Reference Objective',
+    exact: true,
+    component: EditRefNew,
+  },
 ]
 
 export default routes

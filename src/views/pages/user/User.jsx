@@ -1,109 +1,217 @@
-import {
-  CalendarToday,
-  LocationSearching,
-  MailOutline,
-  PermIdentity,
-  PhoneAndroid,
-  Publish,
-} from '@material-ui/icons'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { useHistory, Link } from 'react-router-dom'
+import axios from 'axios'
 import './user.css'
+import { CButton, CFormInput, CInputGroup, CInputGroupText } from '@coreui/react'
+import CIcon from '@coreui/icons-react'
+import { cilLockLocked, cilUser } from '@coreui/icons'
 
-export default function User() {
+const Register = () => {
+  const history = useHistory()
+  const userData = JSON.parse(sessionStorage.getItem('user-info'))
+  // console.log(userData)
+  // console.log(userData.username)
+  const [user, setUser] = useState(userData)
+  // setUser(userData)
+  const handleChange = (event) => {
+    const name = event.target.name
+    const value = event.target.value
+    setUser({ ...user, [name]: value })
+  }
+
+  const handlesubmit = async (e) => {
+    e.preventDefault()
+    const result = await axios
+      .post('http://13.212.153.21:3000/saveuserdetail', user)
+      .then((res) => {
+        console.log(res)
+        history.push('/dashboard')
+      })
+      .catch((res) => {
+        console.log(res)
+      })
+    // console.log(result)
+    console.log(user)
+  }
+
   return (
-    <>
-      <div className="user">
-        <div className="userTitleContainer">
-          <h1 className="userTitle">Edit User</h1>
-          <Link to="/newUser">
-            <button className="userAddButton">Create</button>
-          </Link>
-        </div>
-        <div className="userContainer">
-          <div className="userShow">
-            <div className="userShowTop">
-              <img
-                src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-                alt=""
-                className="userShowImg"
-              />
-              <div className="userShowTopTitle">
-                <span className="userShowUsername">Anna Becker</span>
-                <span className="userShowUserTitle">Software Engineer</span>
+    <div className="form">
+      <div className="form-container">
+        <div className="bg-white  p-4 form-field">
+          <form action="" onSubmit={handlesubmit}>
+            <div className='container w-50 d-flex justify-content-center bg-light'><h1>User Profile</h1></div>
+            <div className="container mt-3">
+              <div className="row">
+                <div className="formField">
+                  <CInputGroup className="mb-3">
+                    <CInputGroupText>
+                      <CIcon icon={cilUser} />
+                    </CInputGroupText>
+                    <CFormInput
+                      placeholder="Full Name"
+                      name="fullName"
+                      onChange={handleChange}
+                      autoComplete="fullname"
+                      value={user.fullName}
+                      required
+                    />
+                  </CInputGroup>
+                  <CInputGroup className="mb-3">
+                    <CInputGroupText>@</CInputGroupText>
+                    <CFormInput
+                      placeholder="Username"
+                      type="email"
+                      name="username"
+                      value={user.username}
+                      onChange={handleChange}
+                      autoComplete="email"
+                      required
+                    />
+                  </CInputGroup>
+                  <CInputGroup className="mb-3">
+                    <CInputGroupText>
+                      <CIcon icon={cilLockLocked} />
+                    </CInputGroupText>
+                    <CFormInput
+                      placeholder="Zoom Id"
+                      type="text"
+                      name="zoomId"
+                      value={user.screenNameZoom}
+                      onChange={handleChange}
+                      autoComplete="zoomId"
+                      required
+                    />
+                  </CInputGroup>
+                  <CInputGroup className="mb-3">
+                    <CInputGroupText>
+                      <CIcon icon={cilLockLocked} />
+                    </CInputGroupText>
+                    <CFormInput
+                      placeholder="Teams Id"
+                      type="text"
+                      name="teamsId"
+                      value={user.screenNameTeams}
+                      onChange={handleChange}
+                      autoComplete="teamsId"
+                      required
+                    />
+                  </CInputGroup>
+                  <CInputGroup className="mb-3">
+                    <CInputGroupText>
+                      <CIcon icon={cilLockLocked} />
+                    </CInputGroupText>
+                    <CFormInput
+                      placeholder="Google Id"
+                      type="text"
+                      name="googleId"
+                      value={user.screenNameGoogle}
+                      onChange={handleChange}
+                      autoComplete="googleId"
+                      required
+                    />
+                  </CInputGroup>
+                  <CInputGroup className="mb-3">
+                    <CInputGroupText>
+                      <CIcon icon={cilLockLocked} />
+                    </CInputGroupText>
+                    <CFormInput
+                      type="text"
+                      name="designation"
+                      placeholder="Designation"
+                      autoComplete="new-password"
+                      required
+                      value={user.designation}
+                      onChange={handleChange}
+                    />
+                  </CInputGroup>
+                </div>
+                <div className="formField">
+                  <CInputGroup className="mb-4">
+                    <CInputGroupText>
+                      <CIcon icon={cilLockLocked} />
+                    </CInputGroupText>
+                    <CFormInput
+                      placeholder="Email"
+                      type="email"
+                      autoComplete="email"
+                      name="email"
+                      value={user.email}
+                      onChange={handleChange}
+                      required
+                    />
+                  </CInputGroup>
+                  <CInputGroup className="mb-3">
+                    <CInputGroupText>
+                      <CIcon icon={cilLockLocked} />
+                    </CInputGroupText>
+                    <CFormInput
+                      placeholder="Alternate Email"
+                      type="email"
+                      name="alternateEmail"
+                      value={user.alternateEmail}
+                      onChange={handleChange}
+                      autoComplete="alternateEmail"
+                      required
+                    />
+                  </CInputGroup>
+                  <CInputGroup className="mb-3">
+                    <CInputGroupText>
+                      <CIcon icon={cilLockLocked} />
+                    </CInputGroupText>
+                    <CFormInput
+                      placeholder="Phone Number"
+                      type="text"
+                      name="phoneNo"
+                      value={user.phoneNo}
+                      onChange={handleChange}
+                      autoComplete="PhoneNumber"
+                      required
+                    />
+                  </CInputGroup>
+                  <CInputGroup className="mb-3">
+                    <CInputGroupText>
+                      <CIcon icon={cilLockLocked} />
+                    </CInputGroupText>
+                    <CFormInput
+                      className='bgText'
+                      placeholder="Address 1"
+                      type="text"
+                      name="address1"
+                      value={user.address1}
+                      onChange={handleChange}
+                      autoComplete="address1"
+                      required
+                    />
+                  </CInputGroup>
+                  <CInputGroup className="mb-3">
+                    <CInputGroupText>
+                      <CIcon icon={cilLockLocked} />
+                    </CInputGroupText>
+                    <CFormInput
+                      className='bgText'
+                      placeholder="Address 2"
+                      type="text"
+                      name="address2"
+                      value={user.address2}
+                      onChange={handleChange}
+                      autoComplete="address2"
+                      height='30px'
+                      required
+                    />
+                  </CInputGroup>
+                </div>
               </div>
             </div>
-            <div className="userShowBottom">
-              <span className="userShowTitle">Account Details</span>
-              <div className="userShowInfo">
-                <PermIdentity className="userShowIcon" />
-                <span className="userShowInfoTitle">annabeck99</span>
-              </div>
-              <div className="userShowInfo">
-                <CalendarToday className="userShowIcon" />
-                <span className="userShowInfoTitle">10.12.1999</span>
-              </div>
-              <span className="userShowTitle">Contact Details</span>
-              <div className="userShowInfo">
-                <PhoneAndroid className="userShowIcon" />
-                <span className="userShowInfoTitle">+1 123 456 67</span>
-              </div>
-              <div className="userShowInfo">
-                <MailOutline className="userShowIcon" />
-                <span className="userShowInfoTitle">annabeck99@gmail.com</span>
-              </div>
-              <div className="userShowInfo">
-                <LocationSearching className="userShowIcon" />
-                <span className="userShowInfoTitle">New York | USA</span>
-              </div>
+            <div className="container d-flex justify-content-center">
+              <CButton color="success" type="submit" onClick={handlesubmit}>
+                Save
+              </CButton>
             </div>
-          </div>
-          <div className="userUpdate">
-            <span className="userUpdateTitle">Edit</span>
-            <form className="userUpdateForm">
-              <div className="userUpdateLeft">
-                <div className="userUpdateItem">
-                  <label>Username</label>
-                  <input type="text" placeholder="annabeck99" className="userUpdateInput" />
-                </div>
-                <div className="userUpdateItem">
-                  <label>Full Name</label>
-                  <input type="text" placeholder="Anna Becker" className="userUpdateInput" />
-                </div>
-                <div className="userUpdateItem">
-                  <label>Email</label>
-                  <input
-                    type="text"
-                    placeholder="annabeck99@gmail.com"
-                    className="userUpdateInput"
-                  />
-                </div>
-                <div className="userUpdateItem">
-                  <label>Phone</label>
-                  <input type="text" placeholder="+1 123 456 67" className="userUpdateInput" />
-                </div>
-                <div className="userUpdateItem">
-                  <label>Address</label>
-                  <input type="text" placeholder="New York | USA" className="userUpdateInput" />
-                </div>
-              </div>
-              <div className="userUpdateRight">
-                <div className="userUpdateUpload">
-                  <img
-                    className="userUpdateImg"
-                    src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-                    alt=""
-                  />
-                  <label htmlFor="file">
-                    <Publish className="userUpdateIcon" />
-                  </label>
-                  <input type="file" id="file" style={{ display: 'none' }} />
-                </div>
-                <button className="userUpdateButton">Update</button>
-              </div>
-            </form>
-          </div>
+          </form>
         </div>
       </div>
-    </>
+    </div>
   )
 }
+
+export default Register

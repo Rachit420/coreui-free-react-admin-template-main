@@ -47,8 +47,10 @@ export default function Emotions() {
                   onDragStart={(event) => drag(event, data.id)}
                   onClick={() => id(data.id)}
                   id={data.id}
-                > <span className='close' id={data.name} name={data.name} hidden >
-                  <TiDeleteOutline color="red" id="deleteButton" />
+                >
+                  {' '}
+                  <span className="close" id={data.name} name={data.name} hidden>
+                    <TiDeleteOutline color="red" id="deleteButton" />
                   </span>
                   <input
                     type="button"

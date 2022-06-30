@@ -9,7 +9,6 @@ import Emotions from 'src/components/Emotions/Emotions'
 import { useHistory } from 'react-router-dom'
 import { TiDeleteOutline } from 'react-icons/ti'
 
-
 const CreateNewRef = () => {
   const history = useHistory()
   const userData = JSON.parse(sessionStorage.getItem('user-info'))
@@ -98,7 +97,7 @@ const CreateNewRef = () => {
       ev.target.appendChild(nodeCopy)
       Drop[i].childNodes[1].hidden = false
       Drop[i].childNodes[1].classList.add('pointer')
-      Drop[i].childNodes[1].addEventListener('click',deleteEmot)
+      Drop[i].childNodes[1].addEventListener('click', deleteEmot)
     } else if (count > 0) {
       alert(nodeCopy.id + ' exist')
       document.getElementById('emot').classList.remove('disabled')
@@ -124,9 +123,9 @@ const CreateNewRef = () => {
     // var emotIndex = inputField
     // console.log(emotIndex)
     console.log(inputField[index].associatedEmotions)
-    for(var i=0; i<inputField[index].associatedEmotions.length; i++){
-      if( inputField[index].associatedEmotions[i].emotionId == delEmot){
-        inputField[index].associatedEmotions.splice(i,1)
+    for (var i = 0; i < inputField[index].associatedEmotions.length; i++) {
+      if (inputField[index].associatedEmotions[i].emotionId == delEmot) {
+        inputField[index].associatedEmotions.splice(i, 1)
       }
     }
     console.log(inputField[index].associatedEmotions)
@@ -134,7 +133,6 @@ const CreateNewRef = () => {
     document.getElementById('emot').classList.remove('disabled')
     document.getElementById('expAtt').classList.add('disabled')
     console.log(delEmot)
-    
   }
   const AddEmotions = (index, event) => {
     console.log('nothing to add now')
@@ -148,7 +146,6 @@ const CreateNewRef = () => {
     document.getElementById('createObj').classList.remove('disabled')
     console.log(emValue[index].associatedEmotions)
   }
-  
 
   const handleChange1 = (event, newValue) => {
     setValue1(newValue)
@@ -194,7 +191,7 @@ const CreateNewRef = () => {
           </div>
         </div>
         <div className="container border border-3 p-0 h-100 w-50 d-inline-block mt-3 bg-white">
-          <div id='createObj' className="border border-bottom mb-4 createObj">
+          <div id="createObj" className="border border-bottom mb-4 createObj">
             <div className="px-4 mt-5">
               <label className="">
                 <b>Title of the Refrence objective</b>
@@ -234,15 +231,13 @@ const CreateNewRef = () => {
                     </p>
                     <div className="container" id="div1">
                       <div
-                        className="container border emotCont" 
+                        className="container border emotCont"
                         id={index}
-                        name='Drp'
+                        name="Drp"
                         onDrop={(event) => drop(event, index)}
                         onDragOver={(event) => allowDrop(event)}
-                        style={{borderStyle: 'dotted', borderRadius: 1}}
-                      >
-                        
-                      </div>
+                        style={{ borderStyle: 'dotted', borderRadius: 1 }}
+                      ></div>
                     </div>
                   </div>
                 </div>
@@ -296,7 +291,7 @@ const CreateNewRef = () => {
             valueLabelDisplay="on"
             id="customRange2"
           />
-          <button className="btn btn-primary" onClick={(event) => AddEmotions(divIndex,event)}>
+          <button className="btn btn-primary" onClick={(event) => AddEmotions(divIndex, event)}>
             Save
           </button>
         </div>

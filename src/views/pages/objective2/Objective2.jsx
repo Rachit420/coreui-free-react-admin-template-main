@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import _ from 'lodash'
 import './objective2.css'
-import { Link, useHistory, useNavigate } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { CBadge } from '@coreui/react'
 import { BsPieChart, BsArrowDown } from 'react-icons/bs'
 import { AiFillStar, AiOutlineSearch } from 'react-icons/ai'
@@ -16,7 +16,6 @@ import {
   CTableHeaderCell,
   CTableRow,
 } from '@coreui/react'
-import { check } from 'prettier'
 
 const pageSize = 10
 
@@ -28,13 +27,15 @@ export default function WidgetLg() {
   const [disabled, setDisabled] = useState(0)
   const [searchField, setSearchField] = useState('')
   const history = useHistory()
-  // const navigate = useNavigate()
+
   useEffect(() => {
     loadUsers()
   }, [])
 
   const loadUsers = async () => {
     const result = await axios.get('http://13.212.153.21:3000/refobjectives')
+    console.log(result)
+    // document.getElementById('checkbox').uncheck
     setUser(result.data)
     setPaginatedPosts(_(result.data.reverse()).slice(0).take(pageSize).value())
   }
@@ -79,7 +80,6 @@ export default function WidgetLg() {
     axios
       .post(`http://13.212.153.21:3000/deleterefobjectives`, id)
       .then((response) => {
-        document.getElementById('checkbox').uncheck
         loadUsers()
         // history.push('/objective2')
         // navigate('/objective2')
@@ -88,18 +88,17 @@ export default function WidgetLg() {
       .catch((error) => {
         console.log(error)
       })
-      // history.push('/objective2')
+    // history.push('/objective2')
   }
 
   function state() {
     if (disabled == 0) return true
     else return false
   }
-  function check(){
-    if(ids.length==0){
+  function check() {
+    if (ids.length == 0) {
       return false
     }
-   
   }
   const handleId = (event) => {
     const id = event.target.value
@@ -256,22 +255,20 @@ export default function WidgetLg() {
                   <div>{!user.title ? '' : user.title}</div>
                 </CTableDataCell>
                 <CTableDataCell className="text-center" colSpan="2">
-                  {/* <CIcon size="xl" icon={item.country.flag} title={item.country.name} /> */}
+                  
                   {DateFormatter(user.updatedOn)}
                 </CTableDataCell>
 
                 <CTableDataCell className="text-center" colSpan="2">
                   <CBadge color="success">{!user.status ? 'null' : user.status}</CBadge>
-                  {/* <CProgress thin color={item.usage.color} value={item.usage.value} /> */}
+                
                 </CTableDataCell>
 
                 <CTableDataCell className="text-center">
-                  {/* <CIcon size="xl" icon={item.payment.icon} /> */}
+
                   {!user.score ? '' : user.score.toFixed(1)}
                 </CTableDataCell>
                 <CTableDataCell className="text-center">
-                  {/* <div className="small text-medium-emphasis">Last login</div> */}
-                  {/* <strong>{item.activity}</strong> */}
                   <Link
                     className="btn btn-primary"
                     to={'/' + user.id + '/details/'}
